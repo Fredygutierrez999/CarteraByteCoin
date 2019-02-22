@@ -1,37 +1,20 @@
 ﻿using System;
-using System.Net;
-using System.Threading;
-using System.Web.Http;
-using ProyectoCartera.App_Start;
-using ProyectoCartera.Models.ModeloClases.Seguridad;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 
 namespace ProyectoCartera.Controllers
 {
-    /// <summary>
-    /// Controlador utilizado para administrar 
-    /// </summary>
-    [AllowAnonymous]
-    [RoutePrefix("api/Seguridad")]
-    public class SeguridadController : ApiController
+    public class SeguridadController : Controller
     {
-        [HttpPost]
-        [Route("authenticate")]
-        public IHttpActionResult Authenticate(Usuarios login)
-        {
-            if (login == null)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
 
-            //TODO: Validate credentials Correctly, this code is only for demo !!
-            bool isCredentialValid = (login.Clave == "123456");
-            if (isCredentialValid)
-            {
-                var token = TokenValidationHandler.GenerateTokenJwt(login.Usuario);
-                return Ok(token);
-            }
-            else
-            {
-                return Unauthorized();
-            }
+        /// <summary>
+        /// Vista utilizada para iniciar sesion
+        /// </summary>
+        /// <returns></returns>
+        public ViewResult IniciarSesion() {
+            return View();
         }
 
     }
